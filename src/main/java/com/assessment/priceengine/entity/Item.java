@@ -12,9 +12,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString
 @Table(name = "item")
-public class Item implements Serializable{
+public class Item implements Serializable {
     @Id
-    @Column(name="itemId", nullable = false)
+    @Column(name = "itemId", nullable = false)
     @GeneratedValue
     private int itemId;
 

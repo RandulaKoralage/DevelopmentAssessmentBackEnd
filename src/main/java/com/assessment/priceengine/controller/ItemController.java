@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ItemController {
     @Autowired
     ItemService itemService = new ItemService();
@@ -18,7 +19,7 @@ public class ItemController {
         return ResponseEntity.ok(itemService.getAllItems());
     }
 
-    @RequestMapping(value = "/pricelist", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/price_list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getPriceList(@RequestParam int id) {
         return ResponseEntity.ok(itemService.getPriceList(id));
     }

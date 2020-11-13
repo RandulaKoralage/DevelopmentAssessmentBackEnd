@@ -15,6 +15,6 @@ public class ItemDTO {
     private String itemName;
     private int unitsPerCarton;
     private double pricePerCarton;
-    private HashMap<Integer,Double> unitPrices;
+    private HashMap<Integer, Double> unitPrices;
 
 }

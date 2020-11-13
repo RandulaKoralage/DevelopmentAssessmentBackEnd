@@ -138,12 +138,13 @@ public class ItemServiceTest {
                 "\"50\": 463.75\n" +
                 "}";
         try {
-            priceMap=mapper.readValue(json,new TypeReference<HashMap<Integer,Double>>(){});
+            priceMap = mapper.readValue(json, new TypeReference<HashMap<Integer, Double>>() {
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        ItemDTO itemDTO = new ItemDTO(1,"Penguin-ears",20,175,priceMap);
-        assertEquals(itemDTO,itemService.getPriceList(id));
+        ItemDTO itemDTO = new ItemDTO(1, "Penguin-ears", 20, 175, priceMap);
+        assertEquals(itemDTO, itemService.getPriceList(id));
     }
 }
