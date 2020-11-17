@@ -1,6 +1,8 @@
 package com.assessment.priceengine.controller;
 
 import com.assessment.priceengine.dto.ItemDTO;
+import com.assessment.priceengine.dto.OrderAmountDTO;
+import com.assessment.priceengine.dto.OrderDTO;
 import com.assessment.priceengine.service.ItemService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -115,8 +117,23 @@ public class ItemControllerTest {
         ItemDTO itemDTO = new ItemDTO(1, "Penguin-ears", 20, 175, priceMap);
 
         given(itemService.getPriceList(id)).willReturn(itemDTO);
-        mockMvc.perform(MockMvcRequestBuilders.get("/price_list").queryParam("id","1")
+        mockMvc.perform(MockMvcRequestBuilders.get("/price_list").queryParam("id", "1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andExpect(jsonPath("$.itemId").value(1));
+    }
+
+    @Test
+    public void getPriceForItemTest() throws Exception {
+        OrderDTO order1 = new OrderDTO(1, true, 5);
+
+        OrderAmountDTO orderAmount1 = new OrderAmountDTO(1, 56.88);
+
+        String jsonReq = "{\"itemId\":1,\"isUnit\":true,\"qty\":5" +
+                "}";
+
+        given(itemService.getPriceForItem(order1)).willReturn(orderAmount1);
+        mockMvc.perform(MockMvcRequestBuilders.post("/price")
+                .content(jsonReq).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }
